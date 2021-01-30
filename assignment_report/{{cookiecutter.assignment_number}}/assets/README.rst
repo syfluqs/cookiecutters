@@ -1,0 +1,1 @@
+Put images and other asset resources in this directory.
