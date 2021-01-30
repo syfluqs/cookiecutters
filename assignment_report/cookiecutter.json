@@ -1,0 +1,8 @@
+{
+    "assignment_number": "",
+    "author": "",
+    "roll_number": "",
+    "subject_code": "",
+    "subject_name": "",
+    "report_file_name": "report_{{ cookiecutter.subject_code|lower|replace(' ', '_') }}_{{ cookiecutter.roll_number }}_{{ cookiecutter.author|lower|replace(' ', '_') }}"
+}

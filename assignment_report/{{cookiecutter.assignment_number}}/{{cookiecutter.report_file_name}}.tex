@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{tabularx}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{luacode}
+\usepackage[cache=false,outputdir=dist]{minted}
+\usepackage{fontspec}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+\usepackage{xfrac}
+\usepackage{fancyvrb}
+\usepackage[justification=centering]{caption}
+\usepackage[
+    pdfusetitle,
+    pdfauthor={ {{ cookiecutter.author }} },
+    pdftitle={( {{ cookiecutter.roll_number }} ) {{ cookiecutter.subject_name }} Assignment {{ cookiecutter.assignment_number }} },
+    % pdfsubject={The Subject},
+    % pdfkeywords={Some Keywords},
+    % pdfproducer={Latex},
+    pdfcreator={LateX},
+    colorlinks=true,
+    linkcolor=black!30!blue
+]{hyperref}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setsansfont{Open Sans}
+\setcounter{MaxMatrixCols}{15}
+
+% {% raw -%}
+\newcommand{\lp}[1]{\directlua{tex.print({#1})}}
+\newcommand{\SIsci}[2]{\SI[round-precision=3,round-mode=figures,scientific-notation=true]{#1}{#2}}
+\newcommand{\SIrnd}[2]{\SI[round-precision=3,round-mode=places]{#1}{#2}}
+\newcommand{\numrnd}[1]{\num[round-precision=3,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
+\newcommand{\numsci}[1]{\num[round-precision=3,round-mode=figures,scientific-notation=true]{#1}}
+% {%- endraw %}
+
+\newenvironment{solutions_enum}
+    { \begin{enumerate}[label={\textbf{\textit{Solution.\arabic*}}}] }
+    { \end{enumerate} }
+\newenvironment{solutions_part_enum}
+    { \mbox{}\\\begin{enumerate}[label=\textbf{Part (\alph*)}] }
+    { \end{enumerate} }
+
+% {% raw -%}
+% minted shorthands, #1 = language
+\newcommand{\sourcecodefile}[2]{\inputminted[linenos,breaklines]{#1}{#2}}
+\newenvironment{sourcecode}[1]
+    {\VerbatimEnvironment\begin{minted}[linenos,breaklines,autogobble]{#1}}
+    {\end{minted}}
+% #1 = label of the box
+\newenvironment{sourcecodeoutput}[1]
+    {\VerbatimEnvironment\begin{minted}[breaklines,autogobble,frame=lines,
+        bgcolor=white!90!lightgray,label=#1,labelposition=topline,
+        fontsize=\footnotesize]{text}}
+    {\end{minted}}
+% {%- endraw %}
+
+\graphicspath{ {./assets/} }
+
+\title { {{cookiecutter.subject_code }} {{ cookiecutter.subject_name }} - Assignment {{ cookiecutter.assignment_number }} }
+\author{\textbf { {{ cookiecutter.author }} } \\ \small{Roll no:\textbf { {{cookiecutter.roll_number }} }}}
+\date { {% now  'local', '%-d %B %Y' %} }
+
+\begin{document}
+\maketitle
+
+\begin{luacode}
+
+\end{luacode}
+
+\allowdisplaybreaks
+\begin{solutions_enum}
+    \item{
+        \begin{solutions_part_enum}
+            \item{
+
+            }
+        \end{solutions_part_enum}
+    }
+\end{solutions_enum}
+\end{document}
