@@ -34,13 +34,13 @@
 \setsansfont{Open Sans}
 \setcounter{MaxMatrixCols}{15}
 
-% {% raw -%}
+{% raw -%}
 \newcommand{\lp}[1]{\directlua{tex.print({#1})}}
 \newcommand{\SIsci}[2]{\SI[round-precision=3,round-mode=figures,scientific-notation=true]{#1}{#2}}
 \newcommand{\SIrnd}[2]{\SI[round-precision=3,round-mode=places]{#1}{#2}}
 \newcommand{\numrnd}[1]{\num[round-precision=3,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
 \newcommand{\numsci}[1]{\num[round-precision=3,round-mode=figures,scientific-notation=true]{#1}}
-% {%- endraw %}
+{%- endraw %}
 
 \newenvironment{solutions_enum}
     { \begin{enumerate}[label={\textbf{\textit{Solution.\arabic*}}}] }
@@ -49,7 +49,7 @@
     { \mbox{}\\\begin{enumerate}[label=\textbf{Part (\alph*)}] }
     { \end{enumerate} }
 
-% {% raw -%}
+{% raw -%}
 % minted shorthands, #1 = language
 \newcommand{\sourcecodefile}[2]{\inputminted[linenos,breaklines]{#1}{#2}}
 \newenvironment{sourcecode}[1]
@@ -61,7 +61,7 @@
         bgcolor=white!90!lightgray,label=#1,labelposition=topline,
         fontsize=\footnotesize]{text}}
     {\end{minted}}
-% {%- endraw %}
+{%- endraw %}
 
 \graphicspath{ {./assets/} }
 
