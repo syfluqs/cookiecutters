@@ -1,0 +1,9 @@
+{
+    "project_title": "",
+    "project_subtitle": "",
+    "author": "",
+    "roll_number": "",
+    "subject_code": "",
+    "project_report_file_name": "project_report_{{ cookiecutter.subject_code|lower|replace(' ', '_') }}_{{ cookiecutter.roll_number }}_{{ cookiecutter.author|lower|replace(' ', '_') }}"
+
+}
