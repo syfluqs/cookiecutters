@@ -169,6 +169,7 @@
 
     \newcounter{abstractpage}
     \setcounter{abstractpage}{\value{page}}
+    \phantomsection
     \begin{abstract}
         \thispagestyle{plain}
         \setcounter{page}{\value{abstractpage}}
@@ -181,6 +182,7 @@
     
     \renewcommand{\abstractname}{\lp{acknowledgements_title}}
     \clearpage
+    \phantomsection
     \begin{abstract}
         \thispagestyle{plain}
         \setcounter{page}{\numexpr\value{abstractpage}+1\relax}
@@ -198,10 +200,12 @@
     \tableofcontents
     \clearpage
     
+    \phantomsection
     \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
     \clearpage
     
+    \phantomsection
     \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
     \clearpage
