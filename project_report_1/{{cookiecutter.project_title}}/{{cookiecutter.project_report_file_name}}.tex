@@ -29,11 +29,34 @@
 \usepackage{anyfontsize}
 % change base font size
 \usepackage[fontsize=13pt]{scrextend}
+
+\usepackage{fancyvrb}
+
+\newcommand{\lp}[1]{\directlua{tex.print({#1})}}
 {%- endraw %}
+\begin{luacode}
+    project_title = "{{cookiecutter.project_title}}"
+    project_subtitle = "{{cookiecutter.project_subtitle}}"
+    pdf_title = "{{cookiecutter.subject_code}} Project Report - {{cookiecutter.project_title}}"
+    author = "{{cookiecutter.author}}"
+    roll_number = "{{cookiecutter.roll_number}}"
+    subject_code = "{{cookiecutter.subject_code}}"
+    college_name = "college name"
+    dept_name = "dept name"
+
+    first_page_heading = "Project Report"
+    abstract_title = "Abstract"
+    acknowledgements_title = "Acknowledgements"
+    list_of_figures_title = "List of Figures"
+    list_of_tables_title = "List of Tables"
+    list_of_abbreviations_title = "List of Abbreviations"
+    references_title = "References"
+\end{luacode}
+{% raw -%}
 \usepackage[
     pdfusetitle,
-    pdfauthor={ {{ cookiecutter.author }} },
-    pdftitle={ {{ cookiecutter.subject_code }} Project Report - {{ cookiecutter.project_title }} },
+    pdfauthor={\lp{author}},
+    pdftitle={\lp{pdf_title}},
     % pdfsubject={The Subject},
     % pdfkeywords={Some Keywords},
     % pdfproducer={Latex},
@@ -55,7 +78,6 @@
 
 \usepackage{fancyhdr}
 
-{% raw -%}
 \fancypagestyle{mypagestyle}{
     \fancyhead[L,R]{}										% Clear page headers
     \fancyhead[LE]{\textsl{\leftmark}}
@@ -63,8 +85,7 @@
     \fancyhead[C]{}
     \fancyfoot{}                                            % clear all footer fields
     \fancyfoot[LE,RO]{\thepage}
-{%- endraw %}
-    \fancyfoot[LO,RE]{\textbf{ {{ cookiecutter.project_title }} }}
+    \fancyfoot[LO,RE]{\lp{project_title}}
 }
 \fancypagestyle{toc}{
     \fancyhf{}%
@@ -75,9 +96,9 @@
 
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.4pt}
-\renewcommand{\listfigurename}{List of Figures}
-\renewcommand{\listtablename}{List of Tables}
-\renewcommand{\bibname}{References}
+\renewcommand{\listfigurename}{\lp{list_of_figures_title}}
+\renewcommand{\listtablename}{\lp{list_of_tables_title}}
+\renewcommand{\bibname}{\lp{references_title}}
 
 \usepackage{sectsty}
 \allsectionsfont{\centering \normalfont\scshape}
@@ -85,7 +106,6 @@
 \numberwithin{figure}{section}			% Figurenumbering: section.fig#
 \numberwithin{table}{section}
 
-{% raw -%}
 % change title formats
 \usepackage{titlesec}
 \titleformat{\chapter}[block]{\normalfont\huge\bfseries}{\thechapter.}{1em}{\huge}
@@ -94,8 +114,6 @@
 
 \setcounter{MaxMatrixCols}{15}
 
-{% raw -%}
-\newcommand{\lp}[1]{\directlua{tex.print({#1})}}
 \newcommand{\SIsci}[2]{\SI[round-precision=3,round-mode=figures,scientific-notation=true]{#1}{#2}}
 \newcommand{\SIrnd}[2]{\SI[round-precision=3,round-mode=places]{#1}{#2}}
 \newcommand{\numrnd}[1]{\num[round-precision=3,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
@@ -112,7 +130,6 @@
         bgcolor=white!90!lightgray,label=#1,labelposition=topline,
         fontsize=\footnotesize]{text}}
     {\end{minted}}
-{%- endraw %}
 
 \graphicspath{ {./assets/} }
 
@@ -121,27 +138,27 @@
     \begin{titlepage}
         \centering
         
-        \LARGE{\textsc{Project Report}}
+        \LARGE{\textsc{\lp{first_page_heading}}}
         
         \vspace{\stretch{1}}
         
-        \Huge{\textbf{ {{ cookiecutter.project_title }} }}\\
+        \Huge{\textbf{\lp{project_title}}}\\
         \rule{3in}{0.4pt} \\
-        \Large{ {{ cookiecutter.project_subtitle }} }
+        \Large{\lp{project_subtitle}}
         
         \vspace{\stretch{1}}
 
         \begin{center}
-            \includegraphics[keepaspectratio,scale=0.5]{nitklogo.png}
+            \includegraphics[keepaspectratio,scale=0.5]{front_page_logo.png}
         \end{center}
 
         \vspace{\stretch{3}}
         
         \Large{
-            \textbf{ {{ cookiecutter.author }} }\\
-            {{ cookiecutter.roll_number }}\\ 
-            College Name\\
-            Department Name\\
+            \textbf{\lp{author}}\\
+            \lp{roll_number} \\ 
+            \lp{college_name} \\
+            \lp{dept_name} \\
         }
         
         \vspace*{\stretch{1}}
@@ -155,19 +172,19 @@
     \begin{abstract}
         \thispagestyle{plain}
         \setcounter{page}{\value{abstractpage}}
-        \addcontentsline{toc}{chapter}{Abstract}
+        \addcontentsline{toc}{chapter}{\lp{abstract_title}}
         
         \lipsum[1-1]
         
         \setcounter{abstractpage}{\value{page}}
     \end{abstract}
     
-    \renewcommand{\abstractname}{Acknowledgements}
+    \renewcommand{\abstractname}{\lp{acknowledgements_title}}
     \clearpage
     \begin{abstract}
         \thispagestyle{plain}
         \setcounter{page}{\numexpr\value{abstractpage}+1\relax}
-        \addcontentsline{toc}{chapter}{Acknowledgements}
+        \addcontentsline{toc}{chapter}{\lp{acknowledgements_title}}
 
         \lipsum[2-10]
 
@@ -189,11 +206,13 @@
     \listoftables
     \clearpage
 
-    \printglossary[type=\acronymtype, title=List of Abbreviations, toctitle=List of Abbreviations]
+    \printglossary[type=\acronymtype, title=\lp{list_of_abbreviations_title}, toctitle=\lp{list_of_abbreviations_title}]
     \clearpage
 
     \pagestyle{mypagestyle}
     \pagenumbering{arabic}
+
+    % Main text starts here
 
     \chapter{Introduction}
 
@@ -207,13 +226,13 @@
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{nitklogo.png}
+            \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{front_page_logo.png}
             \caption{Image A}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{nitklogo.png}
+            \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{front_page_logo.png}
             \caption{Image B}
         \end{subfigure}
         \caption{Sample Images}
@@ -222,7 +241,6 @@
     \section{Second Sample Section}
     \lipsum[1-3]
 
-    {% raw -%}
     \begin{table}
         \begin{center}
             \begin{tabular}{|l|l|l|l|}\hline
@@ -245,7 +263,6 @@
             \caption{Sample Table}
         \end{center}
     \end{table}
-    {%- endraw %}
     
     \section{Third Sample Section}
     \newacronym[]{hcf}{HCF}{Highest Common Factor}
@@ -258,3 +275,4 @@
     \bibliographystyle{unsrt}
     \bibliography{bibliography}
 \end{document}
+{%- endraw %}
