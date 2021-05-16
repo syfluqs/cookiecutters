@@ -26,11 +26,20 @@
 \usepackage{subcaption}
 \usepackage{lettrine}
 \usepackage{longtable}
+\usepackage{rotating}
 \usepackage{anyfontsize}
 % change base font size
 \usepackage[fontsize=13pt]{scrextend}
 
 \usepackage{fancyvrb}
+
+\usepackage[style=numeric]{biblatex}
+\addbibresource{bibliography.bib}
+
+% - to adjust margins in the table of contents
+% \usepackage[titles]{tocloft}
+% \cftsetindents{figure}{0em}{3em}
+% \cftsetindents{table}{0em}{3.5em}
 
 \newcommand{\lp}[1]{\directlua{tex.print({#1})}}
 {%- endraw %}
@@ -74,7 +83,8 @@
 
 \usepackage{footnote}
 \usepackage[footnote,acronym,toc]{glossaries}
-\makeglossaries
+% \makeglossaries
+\glsdisablehyper
 
 \usepackage{fancyhdr}
 
@@ -98,7 +108,6 @@
 \renewcommand{\footrulewidth}{0.4pt}
 \renewcommand{\listfigurename}{\lp{list_of_figures_title}}
 \renewcommand{\listtablename}{\lp{list_of_tables_title}}
-\renewcommand{\bibname}{\lp{references_title}}
 
 \usepackage{sectsty}
 \allsectionsfont{\centering \normalfont\scshape}
@@ -118,6 +127,19 @@
 \newcommand{\SIrnd}[2]{\SI[round-precision=3,round-mode=places]{#1}{#2}}
 \newcommand{\numrnd}[1]{\num[round-precision=3,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
 \newcommand{\numsci}[1]{\num[round-precision=3,round-mode=figures,scientific-notation=true]{#1}}
+
+% #1 = width
+% #2 = image path
+% #3 = caption
+% #4 = reference label
+\newcommand{\nonfloatingimage}[4]{
+    \begin{minipage}{#1}
+        \centering
+        \captionsetup{type=figure}
+        \includegraphics[width=0.95\textwidth,keepaspectratio]{#2}
+        \captionof{figure}{#3} \label{#4}
+    \end{minipage}
+}
 
 % minted shorthands, #1 = language
 \newcommand{\sourcecodefile}[2]{\inputminted[linenos,breaklines]{#1}{#2}}
@@ -245,7 +267,7 @@
     \begin{minipage}{0.95\textwidth}
         \centering
         \captionsetup{type=figure}
-        \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{nitklogo.png}
+        \includegraphics[width=0.8\textwidth,totalheight=\textheight,keepaspectratio]{front_page_logo.png}
         \captionof{figure}{Another Image}
     \end{minipage}
 
@@ -283,7 +305,6 @@
     \lipsum[4-5]
 
     \clearpage
-    \bibliographystyle{unsrt}
-    \bibliography{bibliography}
+    \printbibliography[title=\lp{references_title},heading=bibintoc]
 \end{document}
 {%- endraw %}
