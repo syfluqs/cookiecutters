@@ -127,6 +127,10 @@
 \newcommand{\SIrnd}[2]{\SI[round-precision=3,round-mode=places]{#1}{#2}}
 \newcommand{\numrnd}[1]{\num[round-precision=3,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
 \newcommand{\numsci}[1]{\num[round-precision=3,round-mode=figures,scientific-notation=true]{#1}}
+
+\newcommand{\SIrndprecision}[3]{\SI[round-precision=#3,round-mode=places]{#1}{#2}}
+\newcommand{\numrndprecision}[2]{\num[round-precision=#2,round-mode=places,scientific-notation=fixed,fixed-exponent=0]{#1}}
+
 \newcommand{\aligncell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 % #1 = width
